@@ -1,0 +1,15 @@
+.content-client {
+  display: none;
+}
+
+.content-client.show {
+  display: block;
+}
+
+.client-header {
+  cursor: pointer;
+}
+
+.client-header:hover {
+  background-color: #ccc;
+}
