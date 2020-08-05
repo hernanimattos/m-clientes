@@ -1,1 +1,232 @@
-<p>new-client works!</p>
+<div class="card">
+  <div class="card-content content-client">
+    <pre>
+    {{ newClientForm.value | json }}
+    </pre>
+    <form [formGroup]="newClientForm" (ngSubmit)="onSubmit()">
+      <div class="content">
+        <fieldset class="fieldset">
+          <div class="field">
+            <label class="label">Nome</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="text"
+                placeholder="Nome"
+                formControlName="nome"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.nome.invalid &&
+                (newClientForm.controls.nome.dirty ||
+                  newClientForm.controls.nome.touched)
+              "
+            >
+              Nome inválido
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">CPF</label>
+            <div class="control has-icons-left">
+              <input
+                [ngClass]="{
+                  'is-danger':
+                    newClientForm.controls.cpf.invalid &&
+                    (newClientForm.controls.cpf.dirty ||
+                      newClientForm.controls.cpf.touched)
+                }"
+                class="input"
+                type="text"
+                placeholder="000.000.000-00"
+                formControlName="cpf"
+                [textMask]="{ mask: cpfMask }"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-id-card"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.cpf.invalid &&
+                (newClientForm.controls.cpf.dirty ||
+                  newClientForm.controls.cpf.touched)
+              "
+            >
+              CPF inválido
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">CEP</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                [ngClass]="{
+                  'is-danger':
+                    newClientForm.controls.cep.invalid &&
+                    (newClientForm.controls.cep.dirty ||
+                      newClientForm.controls.cep.touched)
+                }"
+                class="input"
+                type="text"
+                placeholder="00000-000"
+                formControlName="cep"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.cep.invalid &&
+                (newClientForm.controls.cep.dirty ||
+                  newClientForm.controls.cep.touched)
+              "
+            >
+              Cep inválido
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">Logradouro</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                [ngClass]="{
+                  'is-danger':
+                    newClientForm.controls.logradouro.invalid &&
+                    (newClientForm.controls.logradouro.dirty ||
+                      newClientForm.controls.logradouro.touched)
+                }"
+                class="input"
+                type="text"
+                placeholder="Rua do cliente"
+                formControlName="logradouro"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.logradouro.invalid &&
+                (newClientForm.controls.logradouro.dirty ||
+                  newClientForm.controls.logradouro.touched)
+              "
+            >
+              Rua inválida
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">Bairro</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                [ngClass]="{
+                  'is-danger':
+                    newClientForm.controls.bairro.invalid &&
+                    (newClientForm.controls.bairro.dirty ||
+                      newClientForm.controls.bairro.touched)
+                }"
+                class="input is-danger"
+                type="text"
+                placeholder="Rua do cliente"
+                formControlName="bairro"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.bairro.invalid &&
+                (newClientForm.controls.bairro.dirty ||
+                  newClientForm.controls.bairro.touched)
+              "
+            >
+              Bairro inválida
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">Localidade</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                [ngClass]="{
+                  'is-danger':
+                    newClientForm.controls.localidade.invalid &&
+                    (newClientForm.controls.localidade.dirty ||
+                      newClientForm.controls.localidade.touched)
+                }"
+                class="input is-danger"
+                type="text"
+                placeholder="Rua do cliente"
+                formControlName="localidade"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.localidade.invalid &&
+                (newClientForm.controls.localidade.dirty ||
+                  newClientForm.controls.localidade.touched)
+              "
+            >
+              Localidade inválida
+            </p>
+          </div>
+
+          <div class="field">
+            <label class="label">UF</label>
+            <div class="control">
+              <div class="select">
+                <select formControlName="uf" required>
+                  <option>Select dropdown</option>
+                  <option>With options</option>
+                </select>
+              </div>
+            </div>
+            <p
+              class="help is-danger"
+              *ngIf="
+                newClientForm.controls.uf.invalid &&
+                (newClientForm.controls.uf.dirty ||
+                  newClientForm.controls.uf.touched)
+              "
+            >
+              UF inválido
+            </p>
+          </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <button type="submit" class="button is-link">
+                Save
+              </button>
+            </div>
+            <div class="control">
+              <button class="button is-link is-light">Delete</button>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </form>
+  </div>
+</div>
