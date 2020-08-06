@@ -7,6 +7,10 @@ import { ListClientsComponent } from './list-clients/list-clients.component';
 import { NewClientComponent } from './new-client/new-client.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { InputValidateComponent } from './shared/validations/input-validate/input-validate.component';
+
+import { UtilsModule, StorageService } from 'dist/utils';
+
+console.log(UtilsModule);
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,8 +23,9 @@ import { InputValidateComponent } from './shared/validations/input-validate/inpu
     AppRoutingModule,
     ReactiveFormsModule,
     TextMaskModule,
+    UtilsModule,
   ],
-  providers: [],
+  providers: [StorageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
