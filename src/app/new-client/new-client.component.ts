@@ -44,7 +44,7 @@ export class NewClientComponent implements OnInit {
   private addClient(key, client) {
     const clients = this.stg.get(key);
     const d = new Date();
-    const id = d.getTime();
+    const id = String(d.getTime());
 
     if (clients && clients.length > 0) {
       clients.push({ id, ...client });
@@ -54,9 +54,15 @@ export class NewClientComponent implements OnInit {
     return this.stg.set(key, [{ id, ...client }]);
   }
 
+  reset() {
+    this.newClientForm.reset();
+  }
+
   onSubmit() {
-    console.warn(this.newClientForm.valid, 'kkkkk');
-    this.addClient('clients', this.newClientForm.value);
+    if (this.newClientForm.valid) {
+      this.addClient('clients', this.newClientForm.value);
+      this.reset();
+    }
   }
 
   ngOnInit(): void {}

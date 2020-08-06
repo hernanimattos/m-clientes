@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CLIENTS } from '../shared/mock-client';
+import { FormBuilder } from '@angular/forms';
 import { StorageService } from 'dist/utils';
 
 interface closest {
@@ -19,27 +19,11 @@ interface event {
   styleUrls: ['./list-clients.component.css'],
 })
 export class ListClientsComponent implements OnInit {
-  clients = CLIENTS;
-  constructor(private stg: StorageService) {}
+  constructor(private fb: FormBuilder, private stg: StorageService) {}
 
   ngOnInit(): void {}
 
-  public showClientDetails(event: event) {
-    const parent = event.target.closest('.card');
-    const child = parent.querySelectorAll('.content-client')[0];
-    child.classList.toggle('show');
-  }
-
-  private allowEditClientDetails(event: event) {
-    const parent = event.target.closest('.card');
-    const child = parent.querySelectorAll('.content-client')[0];
-    const fildSetEdit = child.getElementsByTagName('fieldset')[0];
-
-    fildSetEdit.toggleAttribute('disabled');
-  }
-
   public loadClients() {
-    console.log(this.stg.get('clients'), 'llll');
     return this.stg.get('clients');
   }
 }

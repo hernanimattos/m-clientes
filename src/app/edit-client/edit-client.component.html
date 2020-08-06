@@ -1,0 +1,235 @@
+<div class="columns is-tablet is-multiline">
+  <div class="column">
+    <div class="card">
+      <div class="card-content content-client">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <a class="button is-primary"
+               (click)="allowEditClientDetails($event)">
+              Editar
+            </a>
+          </p>
+
+          <p class="control is-expanded">
+            <a class="button is-danger"
+               (click)="removeClient(client.id)">
+              Deletar
+            </a>
+          </p>
+        </div>
+        <form [formGroup]="editClientForm"
+              (ngSubmit)="onSubmit()">
+          <div class="content">
+            <fieldset class="fieldset"
+                      disabled>
+              <div class="field">
+                <label class="label">Nome</label>
+                <div class="control has-icons-left">
+                  <input class="input"
+                         type="text"
+                         placeholder="Nome"
+                         formControlName="nome"
+                         required
+                         [ngModel]="client.nome" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.nome.invalid &&
+                  (editClientForm.controls.nome.dirty ||
+                    editClientForm.controls.nome.touched)
+                ">
+                  Nome inválido
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">CPF</label>
+                <div class="control has-icons-left">
+                  <input [ngClass]="{
+                    'is-danger':
+                      editClientForm.controls.cpf.invalid &&
+                      (editClientForm.controls.cpf.dirty ||
+                        editClientForm.controls.cpf.touched)
+                  }"
+                         pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                         class="input"
+                         type="text"
+                         placeholder="000.000.000-00"
+                         formControlName="cpf"
+                         [textMask]="{ mask: cpfMask }"
+                         required
+                         [ngModel]="client.cpf" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-id-card"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.cpf.invalid &&
+                  (editClientForm.controls.cpf.dirty ||
+                    editClientForm.controls.cpf.touched)
+                ">
+                  CPF inválido
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">CEP</label>
+                <div class="control has-icons-left">
+                  <input [ngClass]="{
+                    'is-danger':
+                      editClientForm.controls.cep.invalid &&
+                      (editClientForm.controls.cep.dirty ||
+                        editClientForm.controls.cep.touched)
+                  }"
+                         class="input"
+                         type="text"
+                         placeholder="00000-000"
+                         formControlName="cep"
+                         [textMask]="{ mask: cepMask }"
+                         pattern="[0-9]{5}-[0-9]{3}"
+                         required
+                         [ngModel]="client.cep" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.cep.invalid &&
+                  (editClientForm.controls.cep.dirty ||
+                    editClientForm.controls.cep.touched)
+                ">
+                  Cep inválido
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">Logradouro</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input [ngClass]="{
+                    'is-danger':
+                      editClientForm.controls.logradouro.invalid &&
+                      (editClientForm.controls.logradouro.dirty ||
+                        editClientForm.controls.logradouro.touched)
+                  }"
+                         class="input"
+                         type="text"
+                         placeholder="Rua do cliente"
+                         formControlName="logradouro"
+                         required
+                         [ngModel]="client.logradouro" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.logradouro.invalid &&
+                  (editClientForm.controls.logradouro.dirty ||
+                    editClientForm.controls.logradouro.touched)
+                ">
+                  Rua inválida
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">Bairro</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input [ngClass]="{
+                    'is-danger':
+                      editClientForm.controls.bairro.invalid &&
+                      (editClientForm.controls.bairro.dirty ||
+                        editClientForm.controls.bairro.touched)
+                  }"
+                         class="input is-danger"
+                         type="text"
+                         placeholder="Rua do cliente"
+                         formControlName="bairro"
+                         required
+                         [ngModel]="client.bairro" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.bairro.invalid &&
+                  (editClientForm.controls.bairro.dirty ||
+                    editClientForm.controls.bairro.touched)
+                ">
+                  Bairro inválida
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">Localidade</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input [ngClass]="{
+                    'is-danger':
+                      editClientForm.controls.localidade.invalid &&
+                      (editClientForm.controls.localidade.dirty ||
+                        editClientForm.controls.localidade.touched)
+                  }"
+                         class="input is-danger"
+                         type="text"
+                         placeholder="Rua do cliente"
+                         formControlName="localidade"
+                         required
+                         [ngModel]="client.localidade" />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.localidade.invalid &&
+                  (editClientForm.controls.localidade.dirty ||
+                    editClientForm.controls.localidade.touched)
+                ">
+                  Localidade inválida
+                </p>
+              </div>
+
+              <div class="field">
+                <label class="label">UF</label>
+                <div class="control">
+                  <div class="select">
+                    <select formControlName="uf"
+                            required>
+                      <option>Select dropdown</option>
+                      <option>With options</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="help is-danger"
+                   *ngIf="
+                  editClientForm.controls.uf.invalid &&
+                  (editClientForm.controls.uf.dirty ||
+                    editClientForm.controls.uf.touched)
+                ">
+                  UF inválido
+                </p>
+              </div>
+
+              <div class="field is-grouped">
+                <div class="control">
+                  <button type="submit"
+                          class="button is-link">
+                    Save
+                  </button>
+                </div>
+                <div class="control">
+                  <button class="button is-link is-light">Delete</button>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

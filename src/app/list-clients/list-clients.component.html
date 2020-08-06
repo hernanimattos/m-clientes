@@ -1,144 +1,20 @@
 <div class="columns is-tablet is-multiline">
   <div class="column is-half-tablet is-one-third-widescreen is-narrow"
        *ngFor="let client of loadClients()">
-
     <div class="card">
       <div class="card-content client-header"
-           (click)="showClientDetails($event)"
-           attr.data-client="{{client.id}}">
-        <strong>NOME: </strong>{{client.nome}}
-      </div>
-
-      <div class="card-content content-client">
-        <div class="field is-grouped">
-          <p class="control is-expanded">
-            <a class="button is-primary"
-               (click)="allowEditClientDetails($event)">
-              Editar
-            </a>
-          </p>
-
-          <p class="control is-expanded">
-            <a class="button is-danger"
-               (click)="allowEditClientDetails($event)">
-              Deletar
-            </a>
-          </p>
+           attr.data-client="{{ client.id }}">
+        <div>
+          <strong>NOME: </strong>{{ client.nome }}
 
         </div>
-        <div class="content">
-          <fieldset disabled
-                    class="fieldset">
-            <div class="field">
-              <label class="label">Nome</label>
-              <div class="control has-icons-left">
-                <input class="input"
-                       type="text"
-                       placeholder="Nome">
-                <span class="icon is-small is-left">
+        <a [routerLink]="['/edit', client.id]">
 
-                  <i class="fas fa-user"></i>
-                </span>
-              </div>
-              <p class="help is-danger">Nome inválido</p>
-            </div>
-
-            <div class="field">
-              <label class="label">CPF</label>
-              <div class="control has-icons-left ">
-                <input class="input is-success"
-                       type="text"
-                       placeholder="Nome"
-                       value="">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-id-card"></i>
-                </span>
-
-              </div>
-              <p class="help is-danger">CPF inválido</p>
-            </div>
-
-            <div class="field">
-              <label class="label">CEP</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger"
-                       type="email"
-                       placeholder="00000-000"
-                       value="">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </div>
-              <p class="help is-danger">Cep inválido</p>
-            </div>
-
-            <div class="field">
-              <label class="label">Logradouro</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger"
-                       type="email"
-                       placeholder="Rua do cliente"
-                       value="">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </div>
-              <p class="help is-danger">Rua inválida</p>
-            </div>
-
-            <div class="field">
-              <label class="label">Bairro</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger"
-                       type="email"
-                       placeholder="Rua do cliente"
-                       value="">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </div>
-              <p class="help is-danger">Bairro inválida</p>
-            </div>
-
-            <div class="field">
-              <label class="label">Localidade</label>
-              <div class="control has-icons-left has-icons-right">
-                <input class="input is-danger"
-                       type="email"
-                       placeholder="Rua do cliente"
-                       value="">
-                <span class="icon is-small is-left">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </div>
-              <p class="help is-danger">Localidade inválida</p>
-            </div>
-
-            <div class="field">
-              <label class="label">UF</label>
-              <div class="control">
-                <div class="select">
-                  <select>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
-                  </select>
-                </div>
-              </div>
-              <p class="help is-danger">UF inválido</p>
-            </div>
-
-            <div class="field is-grouped">
-              <div class="control">
-                <button class="button is-link">Save</button>
-              </div>
-              <div class="control">
-                <button class="button is-link is-light">Delete</button>
-              </div>
-            </div>
-          </fieldset>
-        </div>
+          <span class="icon is-right">
+            <i class="far fa-eye"></i>
+          </span>
+        </a>
       </div>
     </div>
   </div>
-
 </div>

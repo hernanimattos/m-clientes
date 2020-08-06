@@ -8,6 +8,8 @@
 
 .client-header {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 .client-header:hover {

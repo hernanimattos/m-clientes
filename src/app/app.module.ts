@@ -9,6 +9,7 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { InputValidateComponent } from './shared/validations/input-validate/input-validate.component';
 
 import { UtilsModule, StorageService } from 'dist/utils';
+import { EditClientComponent } from './edit-client/edit-client.component';
 
 console.log(UtilsModule);
 @NgModule({
@@ -17,6 +18,7 @@ console.log(UtilsModule);
     ListClientsComponent,
     NewClientComponent,
     InputValidateComponent,
+    EditClientComponent,
   ],
   imports: [
     BrowserModule,
