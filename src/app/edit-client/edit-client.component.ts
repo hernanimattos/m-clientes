@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { StorageService } from 'dist/utils';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Client } from '../shared/client.model';
+import { Client } from '../shared/models/client.model';
 
 interface closest {
   (arg0: string): any;

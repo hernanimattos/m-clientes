@@ -8,10 +8,9 @@ import { NewClientComponent } from './new-client/new-client.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { InputValidateComponent } from './shared/validations/input-validate/input-validate.component';
 
-import { UtilsModule, StorageService } from 'dist/utils';
+import { UtilsModule, StorageService, HttpService } from 'dist/utils';
 import { EditClientComponent } from './edit-client/edit-client.component';
 
-console.log(UtilsModule);
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +26,7 @@ console.log(UtilsModule);
     TextMaskModule,
     UtilsModule,
   ],
-  providers: [StorageService],
+  providers: [StorageService, HttpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
