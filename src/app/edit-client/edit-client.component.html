@@ -4,18 +4,21 @@
       <div class="card-content content-client">
         <div class="field is-grouped">
           <p class="control is-expanded">
-            <a
-              class="button is-primary"
+            <button
+              class="button is-primary is-fullwidth"
               (click)="allowEditClientDetails($event)"
             >
               Editar
-            </a>
+            </button>
           </p>
 
           <p class="control is-expanded">
-            <a class="button is-danger" (click)="removeClient(client.id)">
+            <button
+              class="button is-danger is-fullwidth"
+              (click)="removeClient(client.id)"
+            >
               Deletar
-            </a>
+            </button>
           </p>
         </div>
         <form [formGroup]="editClientForm" (ngSubmit)="onSubmit()">
@@ -177,8 +180,8 @@
                   </p>
                 </div>
                 <div class="field is-grouped">
-                  <div class="control">
-                    <button type="submit" class="button is-link">
+                  <div class="control is-expanded">
+                    <button type="submit" class="button is-link is-fullwidth">
                       Save
                     </button>
                   </div>
