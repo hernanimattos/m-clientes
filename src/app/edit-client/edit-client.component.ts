@@ -4,18 +4,11 @@ import { Validators } from '@angular/forms';
 import { StorageService } from 'dist/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../shared/models/client.model';
-
-interface closest {
-  (arg0: string): any;
-}
-
-interface target {
-  closest: closest;
-}
-
-interface event {
-  target: target;
-}
+import { ClientService } from '../shared/client.service';
+import { cepReponse } from '../shared/models/cepResponse.model';
+import { event } from '../shared/models/event.model';
+import { Uf } from '../shared/models/uf.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-client',
@@ -27,17 +20,27 @@ export class EditClientComponent implements OnInit {
     private _fb: FormBuilder,
     private _stg: StorageService,
     private _activeRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _clientService: ClientService
   ) {}
   private id: String;
-  private sub: any;
   public client: Client;
+  public ufs: Array<Uf>;
 
   ngOnInit(): void {
-    this.sub = this._activeRoute.params.subscribe((params) => {
-      this.id = params['id'];
-      this.client = this.getUserById(this.id);
-    });
+    this.getUf()
+      .then((respo) => {
+        this.ufs = respo;
+      })
+      .then(() => {
+        this._activeRoute.params.subscribe((params) => {
+          this.id = params['id'];
+          this.client = this.getUserById(this.id);
+          this.editClientForm.patchValue({
+            ...this.client,
+          });
+        });
+      });
   }
 
   public cpfMask = [
@@ -57,16 +60,18 @@ export class EditClientComponent implements OnInit {
     /\d/,
   ];
 
-  public cepMask = [/[1-9]/, /\d/, /\d/, /\d/, /\d/, '-', /[1-9]/, /\d/, /\d/];
+  public cepMask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, '-', /[0-9]/, /\d/, /\d/];
 
   public editClientForm = this._fb.group({
     nome: [null, Validators.required],
     cpf: [null, Validators.required],
-    cep: [null, Validators.required],
-    logradouro: [null, Validators.required],
-    bairro: [null, Validators.required],
-    localidade: [null, Validators.required],
-    uf: [null, Validators.required],
+    address: this._fb.group({
+      cep: [null, Validators.required],
+      logradouro: [null, Validators.required],
+      bairro: [null, Validators.required],
+      localidade: [null, Validators.required],
+      uf: [null, Validators.required],
+    }),
   });
 
   public showClientDetails(event: event) {
@@ -85,6 +90,39 @@ export class EditClientComponent implements OnInit {
 
   public getUserById(id: String) {
     return this._stg.get('clients').find((client: Client) => client.id == id);
+  }
+
+  private getUf(): Promise<any> {
+    return Promise.resolve(this._clientService.getUf());
+  }
+
+  private setCepSearchResult(address: cepReponse) {
+    this.editClientForm.patchValue({
+      address: {
+        ...address,
+      },
+    });
+  }
+
+  public getCep(event: event) {
+    const value = event.target.value;
+    this._clientService.getCep(value).subscribe((cep: cepReponse) => {
+      this.setCepSearchResult(cep);
+    });
+  }
+
+  private isFieldValid(field: string) {
+    return (
+      !this.editClientForm.get(field).valid &&
+      this.editClientForm.get(field).touched
+    );
+  }
+
+  public displayError(field: string) {
+    return {
+      'is-danger': this.isFieldValid(field),
+      'help-error': this.isFieldValid(field),
+    };
   }
 
   public removeClient(id: String) {
@@ -111,6 +149,7 @@ export class EditClientComponent implements OnInit {
   }
 
   public onSubmit() {
+    console.log(this.editClientForm.value);
     this.findClientAndUpdate(this.editClientForm.value);
   }
 }

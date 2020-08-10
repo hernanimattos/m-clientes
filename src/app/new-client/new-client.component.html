@@ -1,30 +1,27 @@
 <div class="card">
   <div class="card-content content-client">
-    <form [formGroup]="newClientForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="newClientForm"
+          (ngSubmit)="onSubmit()">
       <div class="content">
         <fieldset class="fieldset">
           <div class="field">
             <label class="label">Nome</label>
             <div class="control has-icons-left">
-              <input
-                class="input"
-                type="text"
-                placeholder="Nome"
-                formControlName="nome"
-                required
-              />
+              <input class="input"
+                     type="text"
+                     placeholder="Nome"
+                     formControlName="nome"
+                     required />
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
             </div>
-            <p
-              class="help is-danger"
-              *ngIf="
+            <p class="help is-danger"
+               *ngIf="
                 newClientForm.controls.nome.invalid &&
                 (newClientForm.controls.nome.dirty ||
                   newClientForm.controls.nome.touched)
-              "
-            >
+              ">
               Nome inválido
             </p>
           </div>
@@ -32,33 +29,29 @@
           <div class="field">
             <label class="label">CPF</label>
             <div class="control has-icons-left">
-              <input
-                [ngClass]="{
+              <input [ngClass]="{
                   'is-danger':
                     newClientForm.controls.cpf.invalid &&
                     (newClientForm.controls.cpf.dirty ||
                       newClientForm.controls.cpf.touched)
                 }"
-                pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
-                class="input"
-                type="text"
-                placeholder="000.000.000-00"
-                formControlName="cpf"
-                [textMask]="{ mask: cpfMask }"
-                required
-              />
+                     pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+                     class="input"
+                     type="text"
+                     placeholder="000.000.000-00"
+                     formControlName="cpf"
+                     [textMask]="{ mask: cpfMask }"
+                     required />
               <span class="icon is-small is-left">
                 <i class="fas fa-id-card"></i>
               </span>
             </div>
-            <p
-              class="help is-danger"
-              *ngIf="
+            <p class="help is-danger"
+               *ngIf="
                 newClientForm.controls.cpf.invalid &&
                 (newClientForm.controls.cpf.dirty ||
                   newClientForm.controls.cpf.touched)
-              "
-            >
+              ">
               CPF inválido
             </p>
           </div>
@@ -66,22 +59,21 @@
             <div class="field">
               <label class="label">CEP</label>
               <div class="control has-icons-left">
-                <input
-                  [ngClass]="displayError('address.cep')"
-                  class="input"
-                  type="text"
-                  placeholder="00000-000"
-                  formControlName="cep"
-                  [textMask]="{ mask: cepMask }"
-                  pattern="[0-9]{5}-[0-9]{3}"
-                  (blur)="getCep($event)"
-                  required
-                />
+                <input [ngClass]="displayError('address.cep')"
+                       class="input"
+                       type="text"
+                       placeholder="00000-000"
+                       formControlName="cep"
+                       [textMask]="{ mask: cepMask }"
+                       pattern="[0-9]{5}-[0-9]{3}"
+                       (blur)="getCep($event)"
+                       required />
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
               </div>
-              <p class="help is-danger" [ngClass]="displayError('address.cep')">
+              <p class="help is-danger"
+                 [ngClass]="displayError('address.cep')">
                 Cep inválido
               </p>
             </div>
@@ -89,22 +81,18 @@
             <div class="field">
               <label class="label">Logradouro</label>
               <div class="control has-icons-left has-icons-right">
-                <input
-                  [ngClass]="displayError('address.logradouro')"
-                  class="input"
-                  type="text"
-                  placeholder="Rua do cliente"
-                  formControlName="logradouro"
-                  required
-                />
+                <input [ngClass]="displayError('address.logradouro')"
+                       class="input"
+                       type="text"
+                       placeholder="Rua do cliente"
+                       formControlName="logradouro"
+                       required />
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
               </div>
-              <p
-                class="help is-danger"
-                [ngClass]="displayError('address.logradouro')"
-              >
+              <p class="help is-danger"
+                 [ngClass]="displayError('address.logradouro')">
                 Rua inválida
               </p>
             </div>
@@ -112,22 +100,18 @@
             <div class="field">
               <label class="label">Bairro</label>
               <div class="control has-icons-left has-icons-right">
-                <input
-                  [ngClass]="displayError('address.bairro')"
-                  class="input is-danger"
-                  type="text"
-                  placeholder="Rua do cliente"
-                  formControlName="bairro"
-                  required
-                />
+                <input [ngClass]="displayError('address.bairro')"
+                       class="input is-danger"
+                       type="text"
+                       placeholder="Rua do cliente"
+                       formControlName="bairro"
+                       required />
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
               </div>
-              <p
-                class="help is-danger"
-                [ngClass]="displayError('address.bairro')"
-              >
+              <p class="help is-danger"
+                 [ngClass]="displayError('address.bairro')">
                 Bairro inválida
               </p>
             </div>
@@ -135,22 +119,18 @@
             <div class="field">
               <label class="label">Localidade</label>
               <div class="control has-icons-left has-icons-right">
-                <input
-                  [ngClass]="displayError('address.localidade')"
-                  class="input is-danger"
-                  type="text"
-                  placeholder="Rua do cliente"
-                  formControlName="localidade"
-                  required
-                />
+                <input [ngClass]="displayError('address.localidade')"
+                       class="input is-danger"
+                       type="text"
+                       placeholder="Rua do cliente"
+                       formControlName="localidade"
+                       required />
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
               </div>
-              <p
-                class="help is-danger"
-                [ngClass]="displayError('address.bairro')"
-              >
+              <p class="help is-danger"
+                 [ngClass]="displayError('address.bairro')">
                 Localidade inválida
               </p>
             </div>
@@ -158,28 +138,27 @@
             <div class="field">
               <label class="label">UF</label>
               <div class="control">
-                <div class="select" [ngClass]="displayError('address.uf')">
-                  <select formControlName="uf" required>
-                    <option>Select dropdown</option>
-                    <option>With options</option>
+                <div class="select"
+                     [ngClass]="displayError('address.uf')">
+                  <select formControlName="uf"
+                          required>
+                    <option *ngFor="let uf of ufs">{{uf.sigla}}</option>
                   </select>
                 </div>
               </div>
-              <p class="help is-danger" [ngClass]="displayError('address.uf')">
+              <p class="help is-danger"
+                 [ngClass]="displayError('address.uf')">
                 UF inválido
               </p>
             </div>
-          </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button
-                type="submit"
-                class="button is-link"
-                [disabled]="!newClientForm.valid"
-              >
-                Save
-              </button>
+            <div class="field is-grouped">
+              <div class="control">
+                <button type="submit"
+                        class="button is-link"
+                        [disabled]="!newClientForm.valid">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
         </fieldset>

@@ -1,10 +1,14 @@
+interface Address {
+  bairro: string;
+  cep: string;
+  localidade: string;
+  logradouro: string;
+  uf: string;
+}
+
 export interface Client {
-  id: String;
-  nome: String;
-  cpf: String;
-  cep: String;
-  logradouro: String;
-  bairro: String;
-  localidade: String;
-  uf: String;
+  id: string;
+  nome: string;
+  cpf: string;
+  address: Address;
 }

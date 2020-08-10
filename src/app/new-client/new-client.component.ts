@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { StorageService, HttpService } from 'dist/utils';
+import { StorageService } from 'dist/utils';
+
 import { cepReponse } from '../shared/models/cepResponse.model';
 import { Client } from '../shared/models/client.model';
+import { Uf } from '../shared/models/uf.model';
+import { ClientService } from '../shared/client.service';
+import { event } from '../shared/models/event.model';
 
 @Component({
   selector: 'app-new-client',
@@ -11,9 +15,7 @@ import { Client } from '../shared/models/client.model';
   styleUrls: ['./new-client.component.css'],
 })
 export class NewClientComponent implements OnInit {
-  private urlCepApi: string = 'https://viacep.com.br/ws/';
-  private urlUFAPi: string =
-    'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
+  public ufs: Array<Uf>;
 
   public cpfMask = [
     /[0-9]/,
@@ -34,8 +36,6 @@ export class NewClientComponent implements OnInit {
 
   public cepMask = [/[0-9]/, /\d/, /\d/, /\d/, /\d/, '-', /[0-9]/, /\d/, /\d/];
 
-  // public nome: string;
-
   public newClientForm = this._fb.group({
     nome: [null, Validators.required],
     cpf: [null, Validators.required],
@@ -51,10 +51,11 @@ export class NewClientComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _stg: StorageService,
-    private _http: HttpService
+    private _clientService: ClientService
   ) {}
+
   ngOnInit(): void {
-    // this.setCep();
+    this.getUf();
   }
 
   private setCepSearchResult(address: cepReponse) {
@@ -65,42 +66,35 @@ export class NewClientComponent implements OnInit {
     });
   }
 
-  isFieldValid(field: string) {
-    console.log(
-      !this.newClientForm.get(field).valid &&
-        this.newClientForm.get(field).touched &&
-        this.newClientForm.get(field).pristine,
-      'llll'
-    );
+  public isFieldValid(field: string) {
     return (
       !this.newClientForm.get(field).valid &&
       this.newClientForm.get(field).touched
     );
   }
 
-  displayError(field: string) {
+  public displayError(field: string) {
     return {
       'is-danger': this.isFieldValid(field),
       'help-error': this.isFieldValid(field),
     };
   }
 
-  public getCep(event) {
-    const value = event.target.value;
-    this._http
-      .get(`${this.urlCepApi}/${value}/json/`)
-      .subscribe((cep: cepReponse) => {
-        // this.setCep(cep);this.setCepSearchResult(cep)
-        this.setCepSearchResult(cep);
-      });
+  private setUf(ufs: Array<Uf>) {
+    this.ufs = ufs;
   }
 
-  private setCep() {
-    console.log('llll', this.newClientForm);
+  private getUf() {
+    this._clientService.getUf().subscribe((ufs: Array<Uf>) => {
+      this.setUf(ufs);
+    });
+  }
 
-    // this;
-
-    // this.nome = 'aquii';
+  public getCep(event: event) {
+    const value = event.target.value;
+    this._clientService.getCep(value).subscribe((cep: cepReponse) => {
+      this.setCepSearchResult(cep);
+    });
   }
 
   private addClient(key: string, client: Client) {
