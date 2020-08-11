@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpService } from 'utils';
+import { HttpService } from 'utils-clientes';
 import { cepReponse } from './models/cepResponse.model';
 import { Uf } from './models/uf.model';
 
