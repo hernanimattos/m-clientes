@@ -8,7 +8,7 @@ import { NewClientComponent } from './new-client/new-client.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { InputValidateComponent } from './shared/validations/input-validate/input-validate.component';
 
-import { UtilsModule, StorageService, HttpService } from 'dist/utils';
+import { UtilsModule, StorageService, HttpService } from 'utils-clientes';
 import { EditClientComponent } from './edit-client/edit-client.component';
 
 @NgModule({

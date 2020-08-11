@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { StorageService } from 'dist/utils';
+import { StorageService } from 'utils-clientes';
 
 import { cepReponse } from '../shared/models/cepResponse.model';
 import { Client } from '../shared/models/client.model';

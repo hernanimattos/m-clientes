@@ -15,7 +15,7 @@ export class ClientService {
 
   constructor(private _http: HttpService) {}
 
-  public getUf() {
+  public getUf(): Observable<any> {
     return this._http.get(this.ibgeApiUF);
   }
 

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { StorageService } from 'dist/utils';
+import { StorageService } from 'utils-clientes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../shared/models/client.model';
 import { ClientService } from '../shared/client.service';
 import { cepReponse } from '../shared/models/cepResponse.model';
 import { event } from '../shared/models/event.model';
 import { Uf } from '../shared/models/uf.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-client',
@@ -28,19 +27,17 @@ export class EditClientComponent implements OnInit {
   public ufs: Array<Uf>;
 
   ngOnInit(): void {
-    this.getUf()
-      .then((respo) => {
-        this.ufs = respo;
-      })
-      .then(() => {
-        this._activeRoute.params.subscribe((params) => {
-          this.id = params['id'];
-          this.client = this.getUserById(this.id);
-          this.editClientForm.patchValue({
-            ...this.client,
-          });
-        });
+    this.getUf();
+
+    this._activeRoute.params.subscribe((params) => {
+      this.id = params['id'];
+      this.client = this.getUserById(this.id);
+      const { address } = this.client;
+      const { uf } = address;
+      this.editClientForm.patchValue({
+        ...this.client,
       });
+    });
   }
 
   public cpfMask = [
@@ -92,8 +89,8 @@ export class EditClientComponent implements OnInit {
     return this._stg.get('clients').find((client: Client) => client.id == id);
   }
 
-  private getUf(): Promise<any> {
-    return Promise.resolve(this._clientService.getUf());
+  private getUf() {
+    return this._clientService.getUf().subscribe((ufs) => (this.ufs = ufs));
   }
 
   private setCepSearchResult(address: cepReponse) {
@@ -149,7 +146,6 @@ export class EditClientComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.editClientForm.value);
     this.findClientAndUpdate(this.editClientForm.value);
   }
 }
