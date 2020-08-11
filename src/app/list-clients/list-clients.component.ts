@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { StorageService } from 'dist/utils';
+import { StorageService } from 'utils-clientes';
 
 interface closest {
   (arg0: string): any;
